@@ -16,6 +16,8 @@ const base = require('./base')
 const pages =
   fs.readdirSync(path.resolve(__dirname, "../src/page"))
     .filter((filename) => {
+      if (filename === "_template")
+        return false;
       let stats = fs.statSync(path.resolve(__dirname, "../src/page", filename));
       return stats.isDirectory();
     })
@@ -95,6 +97,7 @@ let config = {
     new ExtractTextPlugin('css/[name].[contenthash:7].css'),
     pages.map((pageName) => {
       return new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, "../src/page/" + pageName + "/index.html"),
         filename: pageName + ".html",
         chunks: [pageName]
       })
