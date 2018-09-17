@@ -48,6 +48,7 @@ let config = {
   },
   module: {
     rules: [
+      {test: /\.(htm|html)$/i, loader: "html-withimg-loader"},
       {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
       {
         test: /\.css$/,
@@ -97,7 +98,7 @@ let config = {
     new ExtractTextPlugin('css/[name].[contenthash:7].css'),
     pages.map((pageName) => {
       return new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, "../src/page/" + pageName + "/index.html"),
+        template: "html-withimg-loader!" + path.resolve(__dirname, "../src/page/" + pageName + "/index.html"),
         filename: pageName + ".html",
         chunks: ["common", pageName]
       })
