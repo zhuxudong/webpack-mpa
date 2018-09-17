@@ -70,7 +70,7 @@ let config = {
             loader: 'url-loader',
             options: {
               limit: base.urlLimit,
-              name: path.join('img/[name].[hash:7].[ext]')
+              name: 'img/[name].[hash:7].[ext]'
             }
           }
         ]
@@ -80,7 +80,7 @@ let config = {
         loader: 'url-loader',
         options: {
           limit: base.urlLimit,
-          name: path.join('media/[name].[hash:7].[ext]')
+          name: 'media/[name].[hash:7].[ext]'
         }
       },
       {
@@ -88,7 +88,7 @@ let config = {
         loader: 'url-loader',
         options: {
           limit: base.urlLimit,
-          name: path.join('fonts/[name].[hash:7].[ext]')
+          name: 'fonts/[name].[hash:7].[ext]'
         }
       }
     ]
@@ -99,7 +99,7 @@ let config = {
       return new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../src/page/" + pageName + "/index.html"),
         filename: pageName + ".html",
-        chunks: [pageName]
+        chunks: ["common", pageName]
       })
     }))
 }
