@@ -48,7 +48,8 @@ let config = {
   },
   module: {
     rules: [
-      {test: /\.(htm|html)$/i, loader: "html-withimg-loader"},
+      // {test: /\.(htm|html)$/i, loader: "html-withimg-loader"},
+      {test: /\.html$/, loader: "html-loader"},
       {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
       {
         test: /\.css$/,
@@ -64,7 +65,6 @@ let config = {
           use: ["css-loader", "postcss-loader", "less-loader"]
         })
       },
-      {test: /\.html$/, loader: "text-loader"},
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/, use: [
           {
@@ -98,9 +98,10 @@ let config = {
     new ExtractTextPlugin('css/[name].[contenthash:7].css'),
     pages.map((pageName) => {
       return new HtmlWebpackPlugin({
-        template: "html-withimg-loader!" + path.resolve(__dirname, "../src/page/" + pageName + "/index.html"),
+        template:path.resolve(__dirname, "../src/page/" + pageName + "/index.html"),
         filename: pageName + ".html",
-        chunks: ["common", pageName]
+        chunks: ["common", pageName],
+        test:"123"
       })
     }))
 }
